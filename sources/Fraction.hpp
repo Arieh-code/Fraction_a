@@ -36,9 +36,9 @@ namespace ariel
         bool operator>=(const Fraction &other) const;
         bool operator<=(const Fraction &other) const;
 
-        Fraction operator++();    // pre-increment
+        Fraction &operator++();   // pre-increment
         Fraction operator++(int); // post-increment
-        Fraction operator--();    // pre-decrement
+        Fraction &operator--();   // pre-decrement
         Fraction operator--(int); // post-decrement
 
         // float operators
