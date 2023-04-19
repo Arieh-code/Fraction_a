@@ -42,36 +42,37 @@ namespace ariel
         Fraction operator--(int); // post-decrement
 
         // float operators
-        Fraction operator+(const float f) const;
-        Fraction operator-(const float f) const;
-        Fraction operator*(const float f) const;
-        Fraction operator/(const float f) const;
+        Fraction operator+(float fNum);
+        Fraction operator-(float fNum);
+        Fraction operator*(float fNum);
+        Fraction operator/(float fNum);
 
         // float bool operators
-        bool operator==(const float f) const;
-        bool operator>(const float f) const;
-        bool operator<(const float f) const;
-        bool operator>=(const float f) const;
-        bool operator<=(const float f) const;
+        bool operator==(float fNum);
+        bool operator>(float fNum);
+        bool operator<(float fNum);
+        bool operator>=(float fNum);
+        bool operator<=(float fNum);
 
         // Helper functions
         Fraction reduce() const;
-        Fraction floatToFraction(float f) const;
-        int gcd(int a, int b) const;
+        Fraction floatToFraction(float fNum);
+        int gcd(int num1, int num2) const;
 
-        friend std::ostream &operator<<(std::ostream &os, const Fraction &frac);
-        friend std::istream &operator>>(std::istream &is, Fraction &frac);
+        friend std::ostream &operator<<(std::ostream &outs, const Fraction &frac);
+        friend std::istream &operator>>(std::istream &ins, Fraction &frac);
     };
 
-    Fraction operator+(float f, const Fraction &frac);
-    Fraction operator-(float f, const Fraction &frac);
-    Fraction operator*(float f, const Fraction &frac);
-    Fraction operator/(float f, const Fraction &frac);
-    bool operator==(float f, const Fraction &frac);
-    bool operator>(float f, const Fraction &frac);
-    bool operator>=(float f, const Fraction &frac);
-    bool operator<(float f, const Fraction &frac);
-    bool operator<=(float f, const Fraction &frac);
+    Fraction operator+(float fNum, const Fraction &frac);
+    Fraction operator-(float fNum, const Fraction &frac);
+    Fraction operator*(float fNum, const Fraction &frac);
+    Fraction operator/(float fNum, const Fraction &frac);
+    bool operator==(float fNum, const Fraction &frac);
+    bool operator>(float fNum, const Fraction &frac);
+    bool operator>=(float fNum, const Fraction &frac);
+    bool operator<(float fNum, const Fraction &frac);
+    bool operator<=(float fNum, const Fraction &frac);
+
 }
 
 #endif // FRACTION_HPP
