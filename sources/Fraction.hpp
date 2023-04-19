@@ -56,6 +56,7 @@ namespace ariel
 
         // Helper functions
         Fraction reduce() const;
+        Fraction floatToFraction(float f) const;
         int gcd(int a, int b) const;
 
         friend std::ostream &operator<<(std::ostream &os, const Fraction &frac);
