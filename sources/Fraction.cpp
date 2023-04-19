@@ -247,6 +247,15 @@ Fraction Fraction::floatToFraction(const float frac)
     return Fraction(intF, den).reduce();
 }
 
+Fraction floatToFraction(const float frac)
+{
+    int intF = static_cast<int>(frac * 1000 + 0.5);
+
+    int den = 1000;
+
+    return Fraction(intF, den).reduce();
+}
+
 // Helper function to calculate the greatest common divisor (GCD) of two integers
 int Fraction::gcd(int num1, int num2) const
 {
@@ -263,72 +272,54 @@ int Fraction::gcd(int num1, int num2) const
 
 Fraction ariel::operator+(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp + frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 + frac;
 }
 
 Fraction ariel::operator-(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp - frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 - frac;
 }
 
 Fraction ariel::operator*(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp * frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 * frac;
 }
 
 Fraction ariel::operator/(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp / frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 / frac;
 }
 
 bool ariel::operator==(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp == frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 == frac;
 }
 
 bool ariel::operator>(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp > frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 > frac;
 }
 
 bool ariel::operator<(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp < frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 < frac;
 }
 
 bool ariel::operator>=(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp >= frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 >= frac;
 }
 
 bool ariel::operator<=(const float fNum, const Fraction &frac)
 {
-    int intF = static_cast<int>(fNum * 1000 + 0.5);
-    int den = 1000;
-    Fraction temp = Fraction(intF, den).reduce();
-    return temp <= frac;
+    Fraction Fraction1 = floatToFraction(fNum);
+    return Fraction1 <= frac;
 }
