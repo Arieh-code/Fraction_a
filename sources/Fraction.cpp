@@ -1,5 +1,6 @@
 #include "Fraction.hpp"
 #include <cmath> // for round()
+#include <typeinfo>
 
 using namespace ariel;
 using namespace std;
@@ -7,14 +8,17 @@ using namespace std;
 // fraction constructor
 Fraction::Fraction(int num, int den)
 {
-    if (den == 0)
+    if (den == 0 || num == 0)
     {
         throw invalid_argument("Error: Division by zero!");
+    }
+    if ((typeid(num)) != typeid(int) || (typeid(den)) != typeid(int))
+    {
+        throw invalid_argument("Error: Numbers must be integers!");
     }
 
     this->numerator = num;
     this->denominator = den;
-    // do I need to reduce every fraction when it is created?
 }
 
 // getters and setters
@@ -147,82 +151,82 @@ Fraction Fraction::operator--(int)
     return original;
 }
 
-Fraction Fraction::operator+(const float f) const
+Fraction Fraction::operator+(const float frac)
 {
     // Turn float into fraction then used already implemented operator +
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) + fracF;
 }
 
-Fraction Fraction::operator-(const float f) const
+Fraction Fraction::operator-(const float frac)
 {
     // Turn float into fraction then used already implemented operator -
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) - fracF;
 }
 
-Fraction Fraction::operator*(const float f) const
+Fraction Fraction::operator*(const float frac)
 {
     // Turn float into fraction then used already implemented operator *
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) * fracF;
 }
 
-Fraction Fraction::operator/(const float f) const
+Fraction Fraction::operator/(const float frac)
 {
     // Turn float into fraction then used already implemented operator /
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) / fracF;
 }
 
-bool Fraction::operator==(const float f) const
+bool Fraction::operator==(const float frac)
 {
     // Turn float into fraction then used already implemented operator ==
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) == fracF;
 }
 
-bool Fraction::operator>(const float f) const
+bool Fraction::operator>(const float frac)
 {
     // Turn float into fraction then used already implemented operator >
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) > fracF;
 }
 
-bool Fraction::operator<(const float f) const
+bool Fraction::operator<(const float frac)
 {
     // Turn float into fraction then used already implemented operator <
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) < fracF;
 }
 
-bool Fraction::operator>=(const float f) const
+bool Fraction::operator>=(const float frac)
 {
     // Turn float into fraction then used already implemented operator >=
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) >= fracF;
 }
 
-bool Fraction::operator<=(const float f) const
+bool Fraction::operator<=(const float frac)
 {
     // Turn float into fraction then used already implemented operator <=
-    Fraction fracF = floatToFraction(f);
+    Fraction fracF = floatToFraction(frac);
     return (*this) <= fracF;
 }
 
-ostream &ariel::operator<<(std::ostream &os, const Fraction &f)
+ostream &ariel::operator<<(std::ostream &outs, const Fraction &f)
 {
-    os << f.numerator << "/" << f.denominator;
-    return os;
+    outs << f.numerator << "/" << f.denominator;
+    return outs;
 }
 
-istream &ariel::operator>>(std::istream &is, Fraction &f)
+istream &ariel::operator>>(std::istream &ins, Fraction &f)
 {
     int num, den;
-    is >> num >> den;
+    ins >> num >> den;
     f.numerator = num;
     f.denominator = den;
-    return is;
+    return ins;
 }
 
 // // Helper function to reduce a fraction to its simplest form
@@ -234,9 +238,9 @@ Fraction Fraction::reduce() const
     return Fraction(num, den);                // Return the reduced fraction as a new Fraction object
 }
 
-Fraction Fraction::floatToFraction(float f) const
+Fraction Fraction::floatToFraction(const float frac)
 {
-    int intF = static_cast<int>(f * 1000 + 0.5);
+    int intF = static_cast<int>(frac * 1000 + 0.5);
 
     int den = 1000;
 
@@ -244,15 +248,87 @@ Fraction Fraction::floatToFraction(float f) const
 }
 
 // Helper function to calculate the greatest common divisor (GCD) of two integers
-int Fraction::gcd(int a, int b) const
+int Fraction::gcd(int num1, int num2) const
 {
     // Euclidean algorithm for finding the GCD
-    if (b == 0)
+    if (num2 == 0)
     {
-        return a;
+        return num1;
     }
     else
     {
-        return gcd(b, a % b);
+        return gcd(num2, num1 % num2);
     }
+}
+
+Fraction ariel::operator+(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp + frac;
+}
+
+Fraction ariel::operator-(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp - frac;
+}
+
+Fraction ariel::operator*(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp * frac;
+}
+
+Fraction ariel::operator/(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp / frac;
+}
+
+bool ariel::operator==(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp == frac;
+}
+
+bool ariel::operator>(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp > frac;
+}
+
+bool ariel::operator<(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp < frac;
+}
+
+bool ariel::operator>=(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp >= frac;
+}
+
+bool ariel::operator<=(const float fNum, const Fraction &frac)
+{
+    int intF = static_cast<int>(fNum * 1000 + 0.5);
+    int den = 1000;
+    Fraction temp = Fraction(intF, den).reduce();
+    return temp <= frac;
 }
