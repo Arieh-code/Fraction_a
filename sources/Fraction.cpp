@@ -8,7 +8,7 @@ using namespace std;
 // fraction constructor
 Fraction::Fraction(int num, int den)
 {
-    if (den == 0 || num == 0)
+    if (den == 0)
     {
         throw invalid_argument("Error: Division by zero!");
     }
