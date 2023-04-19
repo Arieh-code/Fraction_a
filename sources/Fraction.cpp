@@ -19,6 +19,9 @@ Fraction::Fraction(int num, int den)
 
     this->numerator = num;
     this->denominator = den;
+    int BNum = gcd(numerator, denominator);
+    numerator /= BNum;
+    denominator /= BNum;
 }
 
 // getters and setters
