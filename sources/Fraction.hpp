@@ -16,7 +16,14 @@ namespace ariel
         void setNumerator(int);
         void setDenominator(int);
 
+        // constructor from int
         Fraction(int num, int den);
+
+        // constructor from float
+        Fraction(float frac);
+
+        // empty constructor
+        Fraction() : numerator(0), denominator(1) {}
         // mathematical operation on two Fraction objects therefore they are const
         // I am sending a  reference and not a value is for efficiency not creating another object
         // and using const to make sure the other isn't modified inside the function
