@@ -11,8 +11,8 @@ namespace ariel
         int denominator;
 
     public:
-        const int &getNumerator();
-        const int &getDenominator();
+        const int &getNumerator() const;
+        const int &getDenominator() const;
         void setNumerator(int);
         void setDenominator(int);
 
